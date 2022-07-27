@@ -1,11 +1,15 @@
 package africa.semicolon.fakeCaller.services;
 
 import africa.semicolon.fakeCaller.Exceptions.UserExistsException;
+import africa.semicolon.fakeCaller.data.models.Contact;
 import africa.semicolon.fakeCaller.data.models.User;
 import africa.semicolon.fakeCaller.data.repositories.UserRepository;
+import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 import africa.semicolon.fakeCaller.dtos.Responses.CreateContactResponse;
 import africa.semicolon.fakeCaller.dtos.Responses.RegisterUserResponse;
+
+import java.util.List;
 
 public class UserService implements iUserService {
     private UserRepository userRepo = new UserRepository();
@@ -36,12 +40,17 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public CreateContactResponse createContact(CreateContactResponse request) {
+    public CreateContactResponse createContact(CreateContactRequest request) {
         return null;
     }
 
     @Override
     public int getNumberOfUsers() {
         return userRepo.count();
+    }
+
+    @Override
+    public List<Contact> getUserContacts(User user) {
+        return null;
     }
 }
