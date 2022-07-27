@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ContactRepository implements ContactInterface {
+public class ContactRepository implements iContactRepository {
     private int counter;
     private List<Contact> contacts = new ArrayList<>();
 

@@ -4,7 +4,7 @@ import africa.semicolon.fakeCaller.data.models.Contact;
 
 import java.util.List;
 
-public interface ContactInterface {
+public interface iContactRepository {
     Contact save(Contact contact);
 
     void delete(Contact contact);

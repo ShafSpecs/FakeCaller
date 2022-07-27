@@ -5,7 +5,7 @@ import africa.semicolon.fakeCaller.data.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements UserInterface {
+public class UserRepository implements iUserRepository {
     private int counter;
     private List<User> users = new ArrayList<>();
 
@@ -14,10 +14,12 @@ public class UserRepository implements UserInterface {
         int userId = user.getId();
         for (User value : users) {
             if (value.getId() == userId) {
-                user.setFirstName(user.getFirstName());
-                user.setLastName(user.getLastName());
-                user.setEmail(user.getEmail());
-                user.setPhoneNumber(user.getPhoneNumber());
+                user.setFirstName(value.getFirstName());
+                user.setLastName(value.getLastName());
+                user.setEmail(value.getEmail());
+                user.setPhoneNumber(value.getPhoneNumber());
+                user.setContacts(value.getContacts());
+
                 return value;
             }
         }

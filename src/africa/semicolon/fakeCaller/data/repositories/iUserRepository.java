@@ -4,7 +4,7 @@ import africa.semicolon.fakeCaller.data.models.User;
 
 import java.util.List;
 
-public interface UserInterface {
+public interface iUserRepository {
     User save(User user);
 
     void delete(User user);
