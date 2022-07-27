@@ -1,7 +1,6 @@
 package africa.semicolon.fakeCaller.services;
 
 import africa.semicolon.fakeCaller.data.models.Contact;
-import africa.semicolon.fakeCaller.data.models.User;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 import africa.semicolon.fakeCaller.dtos.Responses.CreateContactResponse;
