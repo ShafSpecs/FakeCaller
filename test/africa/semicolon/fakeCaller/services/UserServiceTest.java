@@ -75,5 +75,7 @@ public class UserServiceTest {
         addContact.setEmail("ch@hh.com");
 
         userService.createContact(addContact);
+
+        assertEquals(1, userService.getUserContacts("jennifer@gmail.com").size());
     }
 }

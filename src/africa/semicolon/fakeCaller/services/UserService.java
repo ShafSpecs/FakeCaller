@@ -50,7 +50,9 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public List<Contact> getUserContacts(User user) {
+    public List<Contact> getUserContacts(String userEmail) {
+        User validUser = userRepo.findByEmail(userEmail);
+
         return null;
     }
 }

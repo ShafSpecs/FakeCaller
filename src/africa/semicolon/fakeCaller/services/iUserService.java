@@ -16,5 +16,5 @@ public interface iUserService {
 
     int getNumberOfUsers();
 
-    List<Contact> getUserContacts(User user);
+    List<Contact> getUserContacts(String userEmail);
 }
