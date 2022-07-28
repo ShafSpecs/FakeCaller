@@ -9,6 +9,7 @@ import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 import africa.semicolon.fakeCaller.dtos.Responses.CreateContactResponse;
 import africa.semicolon.fakeCaller.dtos.Responses.RegisterUserResponse;
+import africa.semicolon.fakeCaller.utils.Mapper;
 
 import java.util.List;
 
@@ -23,31 +24,25 @@ public class UserService implements iUserService {
 
     @Override
     public RegisterUserResponse register(RegisterUserRequest request) {
-        // check if email exists and throw exception
-
-        //create a new user
-        //copy fields  from request to new user
-        //save new user into repository
-        User savedUser = userRepo.findByEmail(request.getEmail());
-
-        if(savedUser != null) throw new UserExistsException(request.getEmail() + " already exists!");
+        validate(request.getEmail());
 
         User user = new User();
-        user.setPassword(request.getPassword());
-        user.setUsername(request.getUserName());
-        user.setEmail(request.getEmail());
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setPhoneNumber(request.getPhoneNumber());
+        Mapper.map(request, user);
 
         userRepo.save(user);
 
         return null;
     }
 
+    private void validate(String emailAddress) {
+        User savedUser = userRepo.findByEmail(emailAddress);
+        if(savedUser != null) throw new UserExistsException(emailAddress + " already exists!");
+    }
+
     @Override
     public CreateContactResponse createContact(CreateContactRequest request) {
         Contact newContact = new Contact();
+
         newContact.setEmail(request.getEmail());
         newContact.setPhoneNumber(request.getPhoneNumber());
         newContact.setFirstName(request.getFirstName());

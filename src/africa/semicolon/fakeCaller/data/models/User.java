@@ -1,5 +1,6 @@
 package africa.semicolon.fakeCaller.data.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
     private String email;
     private String phoneNumber;
 
-    private List<Contact> contacts;
+    private List<Contact> contacts = new ArrayList<>();
 
     public int getId() {
         return id;

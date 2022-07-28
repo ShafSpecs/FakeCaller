@@ -1,6 +1,7 @@
 package africa.semicolon.fakeCaller.services;
 
 import africa.semicolon.fakeCaller.Exceptions.UserExistsException;
+import africa.semicolon.fakeCaller.data.repositories.ContactRepository;
 import africa.semicolon.fakeCaller.data.repositories.UserRepository;
 import africa.semicolon.fakeCaller.data.repositories.iUserRepository;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
@@ -12,14 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserServiceTest {
     private iUserService userService;
-    private iContactService contactService;
-    private iUserRepository userRepository;
 
     @BeforeEach
     public void instantiateUserService() {
         userService = new UserService(new UserRepository(), new ContactService());
-        contactService = new ContactService();
-        userRepository = new UserRepository();
     }
 
     @Test
@@ -78,7 +75,7 @@ public class UserServiceTest {
         userService.register(req);
 
         CreateContactRequest addContact = new CreateContactRequest();
-        addContact.setUserEmail("you@g.com");
+        addContact.setUserEmail("jennifer@gmail.com");
         addContact.setLastName("Blezzing");
         addContact.setFirstName("Disguise");
         addContact.setPhoneNumber("02975654461");
