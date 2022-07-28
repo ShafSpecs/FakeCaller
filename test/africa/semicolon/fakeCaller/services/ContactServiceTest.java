@@ -2,11 +2,11 @@ package africa.semicolon.fakeCaller.services;
 
 import africa.semicolon.fakeCaller.data.models.Contact;
 import africa.semicolon.fakeCaller.data.models.User;
-import africa.semicolon.fakeCaller.data.repositories.ContactRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ContactServiceTest {
     private ContactService service;
@@ -32,5 +32,6 @@ public class ContactServiceTest {
         service.addNewContact(newContact);
 
         assertEquals(1, service.getAllContacts().size());
+        assertNotEquals(0, newContact.getId());
     }
 }

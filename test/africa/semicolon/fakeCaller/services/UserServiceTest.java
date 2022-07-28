@@ -1,9 +1,7 @@
 package africa.semicolon.fakeCaller.services;
 
 import africa.semicolon.fakeCaller.Exceptions.UserExistsException;
-import africa.semicolon.fakeCaller.data.repositories.ContactRepository;
 import africa.semicolon.fakeCaller.data.repositories.UserRepository;
-import africa.semicolon.fakeCaller.data.repositories.iUserRepository;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 

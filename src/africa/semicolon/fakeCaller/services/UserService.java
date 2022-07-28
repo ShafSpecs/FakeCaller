@@ -17,6 +17,11 @@ public class UserService implements iUserService {
     private final UserRepository userRepo;
     private final ContactService contactService;
 
+    public UserService() {
+        this.userRepo = new UserRepository();
+        this.contactService = new ContactService();
+    }
+
     public UserService(iUserRepository userRepository, iContactService contactService) {
         this.userRepo = (UserRepository) userRepository;
         this.contactService = (ContactService) contactService;
