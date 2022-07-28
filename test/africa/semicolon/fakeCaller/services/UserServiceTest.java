@@ -85,4 +85,5 @@ public class UserServiceTest {
 
         assertEquals(1, userService.getUserContacts("jennifer@gmail.com").size());
     }
+
 }
