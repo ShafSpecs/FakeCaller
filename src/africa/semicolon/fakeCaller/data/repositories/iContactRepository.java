@@ -17,6 +17,8 @@ public interface iContactRepository {
 
     List<Contact> findByLastName(String lastName);
 
+    List<Contact> findByNumber(String number);
+
     List<Contact> findAll();
 
     int count();

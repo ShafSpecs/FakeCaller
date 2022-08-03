@@ -6,11 +6,13 @@ import africa.semicolon.fakeCaller.data.models.User;
 import africa.semicolon.fakeCaller.data.repositories.UserRepository;
 import africa.semicolon.fakeCaller.data.repositories.iUserRepository;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
+import africa.semicolon.fakeCaller.dtos.Requests.DeleteContactRequest;
+import africa.semicolon.fakeCaller.dtos.Requests.EditContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
-import africa.semicolon.fakeCaller.dtos.Responses.CreateContactResponse;
-import africa.semicolon.fakeCaller.dtos.Responses.RegisterUserResponse;
+import africa.semicolon.fakeCaller.dtos.Responses.*;
 import africa.semicolon.fakeCaller.utils.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService implements iUserService {
@@ -36,12 +38,15 @@ public class UserService implements iUserService {
 
         userRepo.save(user);
 
-        return null;
+        RegisterUserResponse res = new RegisterUserResponse();
+        res.setMessage(String.format("%s successfully registered", request.getEmail()));
+
+        return res;
     }
 
     private void validate(String emailAddress) {
         User savedUser = userRepo.findByEmail(emailAddress);
-        if(savedUser != null) throw new UserExistsException(emailAddress + " already exists!");
+        if (savedUser != null) throw new UserExistsException(emailAddress + " already exists!");
     }
 
     @Override
@@ -61,6 +66,14 @@ public class UserService implements iUserService {
 
         userRepo.save(user);
 
+        CreateContactResponse res = new CreateContactResponse();
+        res.setMessage(String.format("%s %s successfully added", request.getFirstName(), request.getLastName()));
+
+        return res;
+    }
+
+    @Override
+    public EditContactResponse editContact(EditContactRequest request) {
         return null;
     }
 
@@ -70,8 +83,36 @@ public class UserService implements iUserService {
     }
 
     @Override
-    public List<Contact> getUserContacts(String userEmail) {
+    public List<GetAllContactsResponse> getUserContacts(String userEmail) {
         User validUser = userRepo.findByEmail(userEmail);
-        return validUser.getContacts();
+        List<Contact> allUserContacts = validUser.getContacts();
+
+        List<GetAllContactsResponse> res = new ArrayList<>();
+
+        allUserContacts.forEach(contact -> {
+            GetAllContactsResponse response = new GetAllContactsResponse();
+
+            response.setId(contact.getId());
+            response.setFirstName(contact.getFirstName());
+            response.setLastName(contact.getLastName());
+
+            res.add(response);
+        });
+
+        return res;
+    }
+
+    @Override
+    public DeleteContactResponse deleteUserContact(DeleteContactRequest request) {
+        User currentUser = userRepo.findByEmail(request.getUserEmail());
+        Contact toBeDeleted = contactService.findContactByNumber(request.getContactNumber()).get(0);
+
+        List<Contact> userContacts = currentUser.getContacts();
+
+        contactService.deleteContact(toBeDeleted);
+
+        userContacts.remove(toBeDeleted);
+
+        return null;
     }
 }

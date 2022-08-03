@@ -3,6 +3,7 @@ package africa.semicolon.fakeCaller.services;
 import africa.semicolon.fakeCaller.Exceptions.UserExistsException;
 import africa.semicolon.fakeCaller.data.repositories.UserRepository;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
+import africa.semicolon.fakeCaller.dtos.Requests.DeleteContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -84,4 +85,33 @@ public class UserServiceTest {
         assertEquals(1, userService.getUserContacts("jennifer@gmail.com").size());
     }
 
+    @Test
+    public void contactCanBeDeleted(){
+        RegisterUserRequest req = new RegisterUserRequest();
+        req.setEmail("jennifer@gmail.com");
+        req.setLastName("williams");
+        req.setFirstName("omotola");
+        req.setPassword("pinkButterfly");
+        req.setPhoneNumber("09078659456");
+
+        CreateContactRequest addContact = new CreateContactRequest();
+        addContact.setUserEmail("jennifer@gmail.com");
+        addContact.setLastName("Blezzing");
+        addContact.setFirstName("Disguise");
+        addContact.setPhoneNumber("02975654461");
+        addContact.setEmail("ch@hh.com");
+
+        userService.register(req);
+        userService.createContact(addContact);
+
+        assertEquals(1, userService.getUserContacts("jennifer@gmail.com").size());
+
+        DeleteContactRequest res = new DeleteContactRequest();
+        res.setContactNumber("02975654461");
+        res.setUserEmail("jennifer@gmail.com");
+
+        userService.deleteUserContact(res);
+
+        assertEquals(0, userService.getUserContacts("jennifer@gmail.com").size());
+    }
 }

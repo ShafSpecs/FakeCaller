@@ -1,15 +1,16 @@
 package africa.semicolon.fakeCaller.controllers;
 
-import africa.semicolon.fakeCaller.data.models.Contact;
 import africa.semicolon.fakeCaller.dtos.Requests.CreateContactRequest;
 import africa.semicolon.fakeCaller.dtos.Requests.RegisterUserRequest;
 import africa.semicolon.fakeCaller.dtos.Responses.CreateContactResponse;
+import africa.semicolon.fakeCaller.dtos.Responses.GetAllContactsResponse;
 import africa.semicolon.fakeCaller.dtos.Responses.RegisterUserResponse;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface iUserController {
-    RegisterUserResponse registerUser(RegisterUserRequest request);
+    ResponseEntity<?> registerUser(RegisterUserRequest request);
     CreateContactResponse addContact(CreateContactRequest request);
-    List<Contact> findUserContacts(String userEmail);
+    List<GetAllContactsResponse> findUserContacts(String userEmail);
 }

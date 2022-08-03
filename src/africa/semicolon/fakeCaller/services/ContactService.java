@@ -23,6 +23,35 @@ public class ContactService implements iContactService {
     }
 
     @Override
+    public void deleteContact(Contact contact) {
+        repo.delete(contact);
+    }
+
+    @Override
+    public Contact editContact(Contact contact) {
+        Contact editedContact = repo.findById(contact.getId());
+
+        editedContact.setFirstName(contact.getFirstName());
+        editedContact.setLastName(contact.getLastName());
+        editedContact.setEmail(contact.getEmail());
+        editedContact.setPhoneNumber(contact.getPhoneNumber());
+
+        repo.save(editedContact);
+
+        return editedContact;
+    }
+
+    @Override
+    public List<Contact> findContactByNumber(String number) {
+        return repo.findByNumber(number);
+    }
+
+    @Override
+    public List<Contact> findContactByFirstName(String name) {
+        return repo.findByFirstName(name);
+    }
+
+    @Override
     public List<Contact> getAllContacts() {
         return repo.findAll();
     }

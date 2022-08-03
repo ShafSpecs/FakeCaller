@@ -122,4 +122,21 @@ public class ContactRepositoryTest {
 
         assertEquals(2, contactRepository.findAll().size());
     }
+
+    @Test
+    public void deleteContact_deleteViaPhoneNumber(){
+        ContactRepository repo = new ContactRepository();
+        Contact contact = new Contact();
+
+        contact.setEmail("a@b.c");
+        contact.setPhoneNumber("0902152");
+        contact.setFirstName("Chick");
+
+        repo.save(contact);
+
+        Contact toBeDeleted = repo.findByNumber(contact.getPhoneNumber()).get(0);
+        repo.delete(toBeDeleted);
+
+        assertEquals(0, repo.findAll().size());
+    }
 }

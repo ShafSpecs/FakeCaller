@@ -79,6 +79,17 @@ public class ContactRepository implements iContactRepository {
         return newList;
     }
 
+    public List<Contact> findByNumber(String phoneNumber){
+        List<Contact> newList = new ArrayList<>();
+        for (Contact contact : contacts) {
+            if (Objects.equals(contact.getPhoneNumber(), phoneNumber)) {
+                newList.add(contact);
+            }
+        }
+
+        return newList;
+    }
+
     @Override
     public List<Contact> findAll() {
         return contacts;
